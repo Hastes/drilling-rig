@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Ubuntu, Manrope } from "next/font/google";
+import { PageReadyProvider } from "@/context/PageReadyContext";
 import { Preloader } from "@/components/Preloader";
 import "./globals.css";
 
@@ -29,8 +30,10 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={`${ubuntu.variable} ${manrope.variable} font-sans antialiased`}>
-        <Preloader />
-        {children}
+        <PageReadyProvider>
+          <Preloader />
+          {children}
+        </PageReadyProvider>
       </body>
     </html>
   );

@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { usePageReady } from "@/context/PageReadyContext";
 
 export function Hero() {
+  const pageReady = usePageReady();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollY, setScrollY] = useState(0);
   const [revealed, setRevealed] = useState(false);
@@ -16,13 +18,15 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
+    if (!pageReady) return;
     const t = setTimeout(() => setRevealed(true), 300);
     return () => clearTimeout(t);
-  }, []);
+  }, [pageReady]);
   useEffect(() => {
+    if (!pageReady) return;
     const t = setTimeout(() => setLayersSettled(true), 3500);
     return () => clearTimeout(t);
-  }, []);
+  }, [pageReady]);
 
   const skyOffset = revealed ? 0 : -35;
   const groundOffset = revealed ? 0 : -55;

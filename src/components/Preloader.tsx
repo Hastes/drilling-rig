@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { PageReadyContext } from "@/context/PageReadyContext";
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const PARALLAX_IMAGES = [
@@ -18,6 +19,8 @@ function loadImage(src: string): Promise<void> {
 }
 
 export function Preloader() {
+  const ctx = useContext(PageReadyContext);
+  const setPageReady = ctx?.setPageReady;
   const [mounted, setMounted] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -31,6 +34,7 @@ export function Preloader() {
 
     const finish = () => {
       setLoaded(true);
+      setPageReady?.();
       setTimeout(() => setVisible(false), 600);
     };
 
