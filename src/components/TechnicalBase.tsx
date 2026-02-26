@@ -5,11 +5,15 @@ const capabilities = [
   "Шнековое бурение малого диаметра",
 ];
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export function TechnicalBase() {
   return (
-    <section className="relative min-h-[500px] md:min-h-[600px] flex items-center py-20 overflow-hidden tech-base-bg">
-
-      {/* Текст справа — над тёмной областью неба и холмов, лучшая читаемость */}
+    <section
+      className="relative min-h-[500px] md:min-h-[600px] flex items-center py-20 overflow-hidden tech-base-bg"
+      style={{ "--tech-bg-url": `url(${base}/assets/drilling-car-2.png)` } as React.CSSProperties}
+    >
+      {/* Текст слева, машина справа */}
       <div className="container-section relative z-10 flex justify-end w-full">
         <div className="w-full max-w-xl">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 drop-shadow-lg">

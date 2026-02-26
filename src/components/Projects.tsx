@@ -34,7 +34,7 @@ export function Projects() {
 
         <div className="relative aspect-video rounded-xl overflow-hidden mb-12 max-w-4xl mx-auto">
           <Image
-            src="/assets/projects.svg"
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/assets/projects.svg`}
             alt="Реализованные проекты"
             fill
             className="object-cover"

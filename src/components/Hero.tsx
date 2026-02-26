@@ -118,7 +118,7 @@ export function Hero() {
         }}
       >
         <Image
-          src="/assets/parralax/грунт.png"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/assets/parralax/грунт.png`}
           alt=""
           fill
           className="object-cover object-[88%_35%] md:object-[0_35%]"
@@ -138,7 +138,7 @@ export function Hero() {
         }}
       >
         <Image
-          src="/assets/parralax/вода.png"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/assets/parralax/вода.png`}
           alt=""
           fill
           className="object-cover object-[88%_35%] md:object-[0_35%]"

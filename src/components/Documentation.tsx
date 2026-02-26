@@ -152,7 +152,7 @@ export function Documentation() {
           {DOCS.map((doc) => (
             <a
               key={doc.href}
-              href={doc.href}
+              href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}${doc.href}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-palette-100 rounded-lg px-5 py-3 text-palette-800 font-medium hover:bg-palette-900 hover:text-white hover:border-palette-900 transition-all duration-300 text-sm"
