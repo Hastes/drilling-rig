@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Ubuntu, Manrope } from "next/font/google";
+import { Preloader } from "@/components/Preloader";
 import "./globals.css";
 
 const ubuntu = Ubuntu({
@@ -28,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={`${ubuntu.variable} ${manrope.variable} font-sans antialiased`}>
+        <Preloader />
         {children}
       </body>
     </html>
