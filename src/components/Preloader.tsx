@@ -35,6 +35,7 @@ export function Preloader() {
     const finish = () => {
       setLoaded(true);
       setPageReady?.();
+      document.body.classList.remove("preloader-active");
       setTimeout(() => setVisible(false), 600);
     };
 
@@ -53,12 +54,13 @@ export function Preloader() {
     run();
   }, [mounted]);
 
-  if (!mounted || !visible) return null;
+  if (!visible) return null;
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-palette-900 transition-opacity duration-500 ease-out"
+      className="fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-500 ease-out"
       style={{
+        backgroundColor: "var(--palette-900, #1E3146)",
         opacity: loaded ? 0 : 1,
         pointerEvents: loaded ? "none" : "auto",
       }}

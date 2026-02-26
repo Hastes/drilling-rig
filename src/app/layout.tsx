@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`${ubuntu.variable} ${manrope.variable} font-sans antialiased`}>
+      <body className={`${ubuntu.variable} ${manrope.variable} font-sans antialiased preloader-active`}>
         <PageReadyProvider>
           <Preloader />
           {children}
