@@ -2,6 +2,21 @@
 
 import { useEffect, useState } from "react";
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const PARALLAX_IMAGES = [
+  `${base}/assets/parralax/грунт.png`,
+  `${base}/assets/parralax/вода.png`,
+];
+
+function loadImage(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve();
+    img.onerror = () => resolve();
+    img.src = src;
+  });
+}
+
 export function Preloader() {
   const [mounted, setMounted] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -19,12 +34,19 @@ export function Preloader() {
       setTimeout(() => setVisible(false), 600);
     };
 
-    if (document.readyState === "complete") {
+    const run = async () => {
+      await Promise.all([
+        document.readyState === "complete"
+          ? Promise.resolve()
+          : new Promise<void>((r) => {
+              window.addEventListener("load", () => r(), { once: true });
+            }),
+        Promise.all(PARALLAX_IMAGES.map((src) => loadImage(src))),
+      ]);
       finish();
-      return;
-    }
-    window.addEventListener("load", finish);
-    return () => window.removeEventListener("load", finish);
+    };
+
+    run();
   }, [mounted]);
 
   if (!mounted || !visible) return null;
