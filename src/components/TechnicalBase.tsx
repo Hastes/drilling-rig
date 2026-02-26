@@ -11,9 +11,9 @@ export function TechnicalBase() {
   return (
     <section
       className="relative min-h-[500px] md:min-h-[600px] flex items-center py-20 overflow-hidden tech-base-bg"
-      style={{ "--tech-bg-url": `url(${base}/assets/drilling-car-2.png)` } as React.CSSProperties}
+      style={{ "--tech-bg-url": `url(${base}/assets/drilling-car.png)` } as React.CSSProperties}
     >
-      {/* Текст слева, машина справа */}
+      {/* Текст справа, машина слева, затемнение справа */}
       <div className="container-section relative z-10 flex justify-end w-full">
         <div className="w-full max-w-xl">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 drop-shadow-lg">

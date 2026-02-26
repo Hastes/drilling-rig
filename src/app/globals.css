@@ -63,25 +63,24 @@ body.preloader-active {
 .tech-base-bg {
   background-image: linear-gradient(
     to right,
-    rgb(0 0 0 / 80%) 0%,
-    rgb(0 0 0 / 70%) 30%,
-    rgb(0 0 0 / 55%) 50%,
-    transparent 60%,
-    transparent 100%
-  ), var(--tech-bg-url, url(/assets/drilling-car-2.png));
+    transparent 0%,
+    transparent 0%,
+    rgb(0 0 0 / 50%) 1%,
+    rgb(0 0 0 / 80%) 100%
+  ), var(--tech-bg-url, url(/assets/drilling-car.png));
   background-size: cover;
-  background-position: right;
+  background-position: left;
 }
 @media (min-width: 768px) {
   .tech-base-bg {
     background-image: linear-gradient(
       to right,
-      rgb(0 0 0) 0%,
-      rgb(0 0 0 / 76%) 40%,
-      transparent 60%,
-      transparent 100%
-    ), var(--tech-bg-url, url(/assets/drilling-car-2.png));
+      transparent 0%,
+      transparent 25%,
+      rgb(0 0 0 / 85%) 65%,
+      rgb(0 0 0) 100%
+    ), var(--tech-bg-url, url(/assets/drilling-car.png));
     background-size: contain;
-    background-position: right;
+    background-position: left;
   }
 }
