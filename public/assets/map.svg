@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="200 180 400 200">
+  <!-- Connection lines -->
+  <g stroke="#3F5E7B" stroke-width="1.5" opacity="0.4" fill="none">
+    <path d="M 320 280 L 400 300 L 480 300"/>
+    <path d="M 320 280 L 380 240 L 520 220"/>
+    <path d="M 320 280 L 280 320"/>
+  </g>
+  <!-- Region markers -->
+  <g fill="#1E3146">
+    <circle cx="320" cy="280" r="12" fill="#1E3146"/>
+    <circle cx="320" cy="280" r="6" fill="#ffffff"/>
+    <circle cx="480" cy="300" r="12" fill="#1E3146"/>
+    <circle cx="480" cy="300" r="6" fill="#ffffff"/>
+    <circle cx="520" cy="220" r="12" fill="#1E3146"/>
+    <circle cx="520" cy="220" r="6" fill="#ffffff"/>
+    <circle cx="380" cy="240" r="10" fill="#1E3146"/>
+    <circle cx="380" cy="240" r="5" fill="#ffffff"/>
+    <circle cx="400" cy="300" r="10" fill="#1E3146"/>
+    <circle cx="400" cy="300" r="5" fill="#ffffff"/>
+    <circle cx="280" cy="320" r="10" fill="#1E3146"/>
+    <circle cx="280" cy="320" r="5" fill="#ffffff"/>
+  </g>
+  <!-- Labels -->
+  <g font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#1E3146" font-weight="600">
+    <text x="340" y="270">Новосибирск</text>
+    <text x="500" y="290">Хакасия</text>
+    <text x="540" y="210">Красноярск</text>
+    <text x="395" y="230">Томск</text>
+    <text x="415" y="315">Кузбасс</text>
+    <text x="240" y="315">Алтай</text>
+  </g>
+</svg>

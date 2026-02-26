@@ -1,10 +1,19 @@
 @tailwind base;
+
+html {
+  scroll-behavior: smooth;
+}
 @tailwind components;
 @tailwind utilities;
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1E3146;
+  --palette-900: #1E3146;
+  --palette-800: #3F5E7B;
+  --palette-400: #8EA9C3;
+  --palette-100: #D9E0E7;
+  --palette-50: #FFFFFF;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,11 +26,57 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-ubuntu), Ubuntu, sans-serif;
+}
+
+@layer components {
+  .container-section {
+    @apply max-w-[90rem] mx-auto px-5 sm:px-8 md:px-16 lg:px-24;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@keyframes scroll-dot {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(28px);
+    opacity: 0.4;
+  }
+}
+
+.animate-scroll-dot {
+  animation: scroll-dot 2s ease-in-out infinite;
+}
+
+.tech-base-bg {
+  background-image: linear-gradient(
+    to right,
+    rgb(0 0 0 / 40%) 0%,
+    rgb(0 0 0 / 55%) 30%,
+    rgb(0 0 0 / 70%) 60%,
+    rgb(0 0 0 / 80%) 100%
+  ), url(/assets/drilling-car.PNG);
+  background-size: cover;
+  background-position: center;
+}
+@media (min-width: 768px) {
+  .tech-base-bg {
+    background-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 35%,
+      rgb(0 0 0 / 76%) 55%,
+      rgb(0 0 0) 100%
+    ), url(/assets/drilling-car.PNG);
+    background-size: contain;
+    background-position: left;
   }
 }
