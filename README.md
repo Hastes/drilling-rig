@@ -28,4 +28,4 @@ Placeholder SVG находятся в `public/assets/`. Замените на р
 ## Деплой на GitHub Pages
 
 1. **Settings → Pages** → **Source** = **GitHub Actions**
-2. Пуш в `main` запускает деплой. Сайт: https://hastes.github.io/drilling-rig/
+2. Пуш в `main` запускает деплой. Сайт: https://пром54.рф/ (custom domain)

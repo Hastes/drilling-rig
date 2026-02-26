@@ -31,9 +31,6 @@ jobs:
 
       - name: Build
         run: npm run build
-        env:
-          BASE_PATH: /drilling-rig
-          NEXT_PUBLIC_BASE_PATH: /drilling-rig
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
