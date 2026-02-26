@@ -67,7 +67,7 @@ body.preloader-active {
     transparent 0%,
     rgb(0 0 0 / 50%) 1%,
     rgb(0 0 0 / 80%) 100%
-  ), var(--tech-bg-url, url(/assets/drilling-car.png));
+  ), var(--tech-bg-url, url(/assets/drilling-car.PNG));
   background-size: cover;
   background-position: left;
 }
@@ -79,7 +79,7 @@ body.preloader-active {
       transparent 25%,
       rgb(0 0 0 / 85%) 65%,
       rgb(0 0 0) 100%
-    ), var(--tech-bg-url, url(/assets/drilling-car.png));
+    ), var(--tech-bg-url, url(/assets/drilling-car.PNG));
     background-size: contain;
     background-position: left;
   }

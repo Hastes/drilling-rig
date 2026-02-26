@@ -6,7 +6,7 @@ const capabilities = [
 ];
 
 export function TechnicalBase() {
-  const assetPath = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/assets/drilling-car.png`;
+  const assetPath = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/assets/drilling-car.PNG`;
   return (
     <section
       className="relative min-h-[500px] md:min-h-[600px] flex items-center py-20 overflow-hidden tech-base-bg"
