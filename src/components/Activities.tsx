@@ -162,16 +162,31 @@ function ActivityRow({
 export function Activities() {
   const [modalImages, setModalImages] = useState<string[]>([]);
   const [modalTitle, setModalTitle] = useState<string>("");
+  const [fullscreenIndex, setFullscreenIndex] = useState<number | null>(null);
+  const fullscreenRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (fullscreenIndex !== null) fullscreenRef.current?.focus();
+  }, [fullscreenIndex]);
 
   const handleTitleClick = (item: typeof activities[0]) => {
     setModalTitle(item.title);
     setModalImages(item.imageUrls.map((p) => `${base}${encodeURI(p)}`));
+    setFullscreenIndex(null);
   };
 
   const closeModal = () => {
     setModalImages([]);
     setModalTitle("");
+    setFullscreenIndex(null);
   };
+
+  const openFullscreen = (index: number) => setFullscreenIndex(index);
+  const closeFullscreen = () => setFullscreenIndex(null);
+  const goPrev = () =>
+    setFullscreenIndex((i) => (i === null ? null : i > 0 ? i - 1 : modalImages.length - 1));
+  const goNext = () =>
+    setFullscreenIndex((i) => (i === null ? null : i < modalImages.length - 1 ? i + 1 : 0));
 
   return (
     <section id="activities" className="relative bg-palette-900 py-20 overflow-hidden">
@@ -223,18 +238,92 @@ export function Activities() {
             {modalImages.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {modalImages.map((src, i) => (
-                  <img
+                  <button
                     key={i}
-                    src={src}
-                    alt={`${modalTitle} — фото ${i + 1}`}
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openFullscreen(i);
+                    }}
+                    className="block w-full text-left focus:outline-none focus:ring-2 focus:ring-palette-400 rounded-lg overflow-hidden"
+                  >
+                    <img
+                      src={src}
+                      alt={`${modalTitle} — фото ${i + 1}`}
+                      className="w-full h-48 object-cover rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
+                    />
+                  </button>
                 ))}
               </div>
             ) : (
               <p className="text-palette-100 text-lg">Фото работ будут добавлены</p>
             )}
           </div>
+        </div>
+      )}
+
+      {/* Полноэкранный просмотр изображения */}
+      {fullscreenIndex !== null && modalImages[fullscreenIndex] && (
+        <div
+          ref={fullscreenRef}
+          className="fixed inset-0 z-[101] flex items-center justify-center bg-black/95 p-4 outline-none"
+          onClick={closeFullscreen}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") closeFullscreen();
+            if (e.key === "ArrowLeft") goPrev();
+            if (e.key === "ArrowRight") goNext();
+          }}
+        >
+          <button
+            type="button"
+            onClick={closeFullscreen}
+            className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+            aria-label="Закрыть"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          {modalImages.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                aria-label="Предыдущее"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goNext(); }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                aria-label="Следующее"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </>
+          )}
+          <div
+            className="max-w-[90vw] max-h-[90vh] flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={modalImages[fullscreenIndex]}
+              alt={`${modalTitle} — фото ${fullscreenIndex + 1}`}
+              className="max-w-full max-h-[90vh] object-contain rounded"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 text-sm">
+            {fullscreenIndex + 1} / {modalImages.length}
+          </span>
         </div>
       )}
     </section>
