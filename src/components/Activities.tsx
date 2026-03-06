@@ -164,25 +164,30 @@ export function Activities() {
   const [modalTitle, setModalTitle] = useState<string>("");
   const [fullscreenIndex, setFullscreenIndex] = useState<number | null>(null);
   const fullscreenRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number>(0);
+  const didSwipe = useRef(false);
+  const SWIPE_THRESHOLD = 50;
 
   useEffect(() => {
     if (fullscreenIndex !== null) fullscreenRef.current?.focus();
   }, [fullscreenIndex]);
 
   const handleTitleClick = (item: typeof activities[0]) => {
+    const images = item.imageUrls.map((p) => `${base}${encodeURI(p)}`);
     setModalTitle(item.title);
-    setModalImages(item.imageUrls.map((p) => `${base}${encodeURI(p)}`));
-    setFullscreenIndex(null);
+    setModalImages(images);
+    setFullscreenIndex(images.length > 0 ? 0 : null);
   };
 
-  const closeModal = () => {
+  const closeFullscreen = () => {
+    if (didSwipe.current) {
+      didSwipe.current = false;
+      return;
+    }
     setModalImages([]);
     setModalTitle("");
     setFullscreenIndex(null);
   };
-
-  const openFullscreen = (index: number) => setFullscreenIndex(index);
-  const closeFullscreen = () => setFullscreenIndex(null);
   const goPrev = () =>
     setFullscreenIndex((i) => (i === null ? null : i > 0 ? i - 1 : modalImages.length - 1));
   const goNext = () =>
@@ -221,52 +226,12 @@ export function Activities() {
         </div>
       </div>
 
-      {/* Модальное окно для фото работ */}
-      {modalTitle && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 overflow-y-auto"
-          onClick={closeModal}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => e.key === "Escape" && closeModal()}
-        >
-          <div
-            className="relative max-w-5xl w-full bg-palette-900/95 rounded-lg p-6 md:p-8 text-center my-8"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-white text-xl font-bold mb-6">{modalTitle}</h3>
-            {modalImages.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {modalImages.map((src, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openFullscreen(i);
-                    }}
-                    className="block w-full text-left focus:outline-none focus:ring-2 focus:ring-palette-400 rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src={src}
-                      alt={`${modalTitle} — фото ${i + 1}`}
-                      className="w-full h-48 object-cover rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
-                    />
-                  </button>
-                ))}
-              </div>
-            ) : (
-              <p className="text-palette-100 text-lg">Фото работ будут добавлены</p>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Полноэкранный просмотр изображения */}
+      {/* Полноэкранный просмотр — открывается сразу при клике на заголовок */}
       {fullscreenIndex !== null && modalImages[fullscreenIndex] && (
         <div
           ref={fullscreenRef}
           className="fixed inset-0 z-[101] flex items-center justify-center bg-black/95 p-4 outline-none"
+          style={{ touchAction: "pan-y" }}
           onClick={closeFullscreen}
           role="button"
           tabIndex={0}
@@ -275,7 +240,21 @@ export function Activities() {
             if (e.key === "ArrowLeft") goPrev();
             if (e.key === "ArrowRight") goNext();
           }}
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0].clientX;
+          }}
+          onTouchEnd={(e) => {
+            if (modalImages.length <= 1) return;
+            const delta = e.changedTouches[0].clientX - touchStartX.current;
+            if (Math.abs(delta) > SWIPE_THRESHOLD) {
+              didSwipe.current = true;
+              delta < 0 ? goNext() : goPrev();
+            }
+          }}
         >
+          <h3 className="absolute top-4 left-4 right-16 text-white font-bold text-lg z-10 line-clamp-2">
+            {modalTitle}
+          </h3>
           <button
             type="button"
             onClick={closeFullscreen}
