@@ -52,7 +52,7 @@ export function Preloader() {
     };
 
     run();
-  }, [mounted]);
+  }, [mounted, setPageReady]);
 
   if (!visible) return null;
 

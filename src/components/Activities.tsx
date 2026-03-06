@@ -248,7 +248,8 @@ export function Activities() {
             const delta = e.changedTouches[0].clientX - touchStartX.current;
             if (Math.abs(delta) > SWIPE_THRESHOLD) {
               didSwipe.current = true;
-              delta < 0 ? goNext() : goPrev();
+              if (delta < 0) goNext();
+              else goPrev();
             }
           }}
         >
@@ -293,6 +294,7 @@ export function Activities() {
             className="max-w-[90vw] max-h-[90vh] flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={modalImages[fullscreenIndex]}
               alt={`${modalTitle} — фото ${fullscreenIndex + 1}`}
