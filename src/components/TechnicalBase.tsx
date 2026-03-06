@@ -21,7 +21,7 @@ export function TechnicalBase() {
 
           <p className="text-lg leading-relaxed text-white/95 mb-4 drop-shadow-md">
             Располагаем современным парком бурового оборудования, способного
-            выполнять работы любой сложности диаметром до 600 мм и глубиной до 250
+            выполнять работы любой сложности диаметром до 1000 мм и глубиной до 250
             м/п.
           </p>
           <p className="text-lg leading-relaxed text-white/95 mb-8 drop-shadow-md">

@@ -89,7 +89,7 @@ function NewsRow({ item, index }: { item: (typeof newsItems)[0]; index: number }
 
 export function News() {
   return (
-    <section className="relative bg-white py-20 overflow-hidden">
+    <section id="news" className="relative bg-white py-20 overflow-hidden">
       <svg className="absolute inset-0 w-full h-full opacity-[0.03]" style={{ pointerEvents: "none" }}>
         <defs>
           <pattern id="news-grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -102,7 +102,7 @@ export function News() {
       <div className="container-section relative z-10">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-4 gap-4">
           <h2 className="text-3xl md:text-4xl font-bold text-palette-900">
-            Хроника работ
+            Новости
           </h2>
           <span className="text-palette-400 text-sm md:text-base max-w-xs">
             Последние реализованные объекты и проекты

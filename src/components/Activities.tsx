@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const activities = [
   {
     num: "01",
@@ -9,6 +11,14 @@ const activities = [
     description:
       "Бурение скважин для изучения состава грунтов, определения уровня грунтовых вод, оценки несущей способности оснований под фундаменты зданий и сооружений. Позволяют заранее увидеть подводные камни и выбрать оптимальное решение ещё на этапе проектирования.",
     tag: "Геология",
+    imageUrls: [
+      "/photos/IMG_2197.jpg",
+      "/photos/IMG_6698.jpg",
+      "/photos/IMG_6699.jpg",
+      "/photos/IMG_6700.jpg",
+      "/photos/IMG_6701.jpg",
+      "/photos/Шерегеш, гора Зеленая июнь 24.jpg",
+    ],
   },
   {
     num: "02",
@@ -16,6 +26,12 @@ const activities = [
     description:
       "Поиск и разведка водоносных горизонтов, бурение эксплуатационных скважин на воду для частных лиц и организаций.",
     tag: "Гидрогеология",
+    imageUrls: [
+      "/photos/IMG_0803.jpg",
+      "/photos/PHOTO-2024-05-03-10-00-04.jpg",
+      "/photos/PHOTO-2024-05-31-22-26-29.jpg",
+      "/photos/IMG_1262.JPG",
+    ],
   },
   {
     num: "03",
@@ -23,6 +39,11 @@ const activities = [
     description:
       "Бурение для установки свай, шпунтовых ограждений, дренажных систем и других инженерных задач любой сложности.",
     tag: "Инженерное бурение",
+    imageUrls: [
+      "/photos/IMG_0015.JPG",
+      "/photos/IMG_4318.JPG",
+      "/photos/928be286-1925-4e00-af2e-a02e2e6cc68f.JPG",
+    ],
   },
   {
     num: "04",
@@ -30,10 +51,36 @@ const activities = [
     description:
       "Заполнение ствола скважины специальными растворами для изоляции участков, укрепления стенок или полной ликвидации выработки.",
     tag: "Тампонаж",
+    imageUrls: [
+      "/photos/IMG_1393.jpg",
+      "/photos/IMG_1401.jpg",
+      "/photos/IMG_4321.jpg",
+    ],
+  },
+  {
+    num: "05",
+    title: "ПБС-МОНТАЖ",
+    description:
+      "Производство павильонов — собственное производство скважинных павильонов с автоматикой под нужды Заказчика.",
+    tag: "Павильоны",
+    imageUrls: [
+      "/photos/IMG_7257.JPG",
+      "/photos/f988f515-f304-4d62-8fec-ef2a934f9015.JPG",
+      "/photos/image-01-11-23-10-06-1 (1).jpeg",
+      "/photos/IMG_6698 (1).jpg",
+    ],
   },
 ];
 
-function ActivityRow({ item, index }: { item: typeof activities[0]; index: number }) {
+function ActivityRow({
+  item,
+  index,
+  onTitleClick,
+}: {
+  item: typeof activities[0];
+  index: number;
+  onTitleClick?: (item: typeof activities[0]) => void;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -45,6 +92,10 @@ function ActivityRow({ item, index }: { item: typeof activities[0]; index: numbe
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
+
+  const handleTitleClick = () => {
+    if (onTitleClick) onTitleClick(item);
+  };
 
   return (
     <div
@@ -84,10 +135,14 @@ function ActivityRow({ item, index }: { item: typeof activities[0]; index: numbe
           </span>
         </div>
 
-        {/* Title */}
+        {/* Title — кликабельно для открытия фото работ */}
         <h3
-          className="font-bold text-white leading-tight group-hover:text-palette-100 transition-colors duration-300"
+          className="font-bold text-white leading-tight group-hover:text-palette-100 transition-colors duration-300 cursor-pointer hover:underline underline-offset-2"
           style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)" }}
+          onClick={handleTitleClick}
+          onKeyDown={(e) => e.key === "Enter" && handleTitleClick()}
+          role="button"
+          tabIndex={0}
         >
           {item.title}
         </h3>
@@ -105,6 +160,19 @@ function ActivityRow({ item, index }: { item: typeof activities[0]; index: numbe
 }
 
 export function Activities() {
+  const [modalImages, setModalImages] = useState<string[]>([]);
+  const [modalTitle, setModalTitle] = useState<string>("");
+
+  const handleTitleClick = (item: typeof activities[0]) => {
+    setModalTitle(item.title);
+    setModalImages(item.imageUrls.map((p) => `${base}${encodeURI(p)}`));
+  };
+
+  const closeModal = () => {
+    setModalImages([]);
+    setModalTitle("");
+  };
+
   return (
     <section id="activities" className="relative bg-palette-900 py-20 overflow-hidden">
       {/* Subtle background texture */}
@@ -131,12 +199,44 @@ export function Activities() {
         {/* Rows */}
         <div className="mt-8">
           {activities.map((item, i) => (
-            <ActivityRow key={item.num} item={item} index={i} />
+            <ActivityRow key={item.num} item={item} index={i} onTitleClick={handleTitleClick} />
           ))}
           {/* Last border */}
           <div className="border-t border-palette-800/30" />
         </div>
       </div>
+
+      {/* Модальное окно для фото работ */}
+      {modalTitle && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 overflow-y-auto"
+          onClick={closeModal}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Escape" && closeModal()}
+        >
+          <div
+            className="relative max-w-5xl w-full bg-palette-900/95 rounded-lg p-6 md:p-8 text-center my-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-white text-xl font-bold mb-6">{modalTitle}</h3>
+            {modalImages.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {modalImages.map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt={`${modalTitle} — фото ${i + 1}`}
+                    className="w-full h-48 object-cover rounded-lg"
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-palette-100 text-lg">Фото работ будут добавлены</p>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

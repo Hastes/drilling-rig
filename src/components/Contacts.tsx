@@ -1,9 +1,21 @@
+import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
+
+const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export function Contacts() {
   return (
     <section id="contacts" className="py-20 bg-palette-900 text-white">
       <div className="container-section">
+        <a href="#" className="group flex justify-center mb-8">
+          <Image
+            src={`${base}/assets/logo.svg`}
+            alt="ПРОМБУРСЕРВИС"
+            width={160}
+            height={148}
+            className="h-16 w-auto transition-all duration-300 ease-out group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.5)]"
+          />
+        </a>
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
           Контакты
         </h2>
