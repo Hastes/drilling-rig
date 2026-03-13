@@ -7,7 +7,6 @@ const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const DOCS = [
   { href: "/assets/docs/Сертификат.pdf", label: "Сертификат" },
   { href: "/assets/docs/Аттестат.pdf", label: "Аттестат" },
-  { href: "/presentation.pdf", label: "Презентация компании", highlight: true },
   { href: "/assets/docs/Разрещение.pdf", label: "Разрешение" },
 ];
 
@@ -158,11 +157,7 @@ export function Documentation() {
               href={`${base}${doc.href}`}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center gap-2 rounded-lg px-5 py-3 font-medium transition-all duration-300 text-sm ${
-                (doc as { highlight?: boolean }).highlight
-                  ? "bg-palette-800 text-white hover:bg-palette-900"
-                  : "bg-white/80 backdrop-blur-sm border border-palette-100 text-palette-800 hover:bg-palette-900 hover:text-white hover:border-palette-900"
-              }`}
+              className="flex items-center gap-2 rounded-lg px-5 py-3 font-medium transition-all duration-300 text-sm bg-white/80 backdrop-blur-sm border border-palette-100 text-palette-800 hover:bg-palette-900 hover:text-white hover:border-palette-900"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>

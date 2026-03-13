@@ -13,14 +13,17 @@ export function Header() {
   return (
     <header className="absolute top-0 left-0 right-0 z-50">
       <div className="container-section w-full py-5 flex items-center justify-between">
-        <a href="#" className="group flex items-center">
+        <a href="#" className="group flex items-center gap-3">
           <Image
             src={`${base}/assets/logo.svg`}
             alt="ПРОМБУРСЕРВИС"
             width={180}
             height={166}
-            className="h-14 w-auto transition-all duration-300 ease-out group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.5)]"
+            className="h-14 pl-1 w-auto translate-x-0.5 transition-all duration-300 ease-out group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.5)]"
           />
+          <span className="font-bold text-white text-sm md:text-base tracking-tight">
+            ПРОМБУРСЕРВИС
+          </span>
         </a>
 
         <nav className="flex gap-6 md:gap-8">
