@@ -6,12 +6,8 @@ export function Contacts() {
   return (
     <section
       id="contacts"
-      className="relative py-20 text-white overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.15) 80%, transparent 100%), url('${base}/assets/contacts-bg-v2.jpg')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative py-20 text-white overflow-hidden contacts-bg"
+      style={{ "--contacts-bg-url": `url('${base}/assets/contacts-bg-v2.jpg')` } as React.CSSProperties}
     >
       <div className="container-section relative z-10">
         <div className="max-w-xl">
