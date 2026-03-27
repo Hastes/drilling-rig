@@ -138,9 +138,10 @@ export function About() {
             обрести непререкаемый авторитет. Наша организация — действующий член
             СОЮЗА БУРОВЫХ ПРЕДПРИЯТИЙ КУЗБАССА{" "}
             <a
-              href="#"
+              href="https://kbs42.ru"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-semibold text-palette-900 hover:text-palette-800"
-              title="Сайт в разработке"
             >
               НКО «КУЗБАССКИЙ БУРОВОЙ СОЮЗ»
             </a>
