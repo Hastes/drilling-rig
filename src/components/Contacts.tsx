@@ -7,7 +7,7 @@ export function Contacts() {
     <section
       id="contacts"
       className="relative py-20 text-white overflow-hidden contacts-bg"
-      style={{ "--contacts-bg-url": `url('${base}/assets/contacts-bg-v2.jpg')` } as React.CSSProperties}
+      style={{ "--contacts-bg-url": `url('${base}/assets/contacts-bg-wide.JPEG')` } as React.CSSProperties}
     >
       <div className="container-section relative z-10">
         <div className="max-w-xl">
