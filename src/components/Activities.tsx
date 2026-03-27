@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ImageFullscreenViewer } from "@/components/ImageFullscreenViewer";
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -163,14 +164,6 @@ export function Activities() {
   const [modalImages, setModalImages] = useState<string[]>([]);
   const [modalTitle, setModalTitle] = useState<string>("");
   const [fullscreenIndex, setFullscreenIndex] = useState<number | null>(null);
-  const fullscreenRef = useRef<HTMLDivElement>(null);
-  const touchStartX = useRef<number>(0);
-  const didSwipe = useRef(false);
-  const SWIPE_THRESHOLD = 50;
-
-  useEffect(() => {
-    if (fullscreenIndex !== null) fullscreenRef.current?.focus();
-  }, [fullscreenIndex]);
 
   const handleTitleClick = (item: typeof activities[0]) => {
     const images = item.imageUrls.map((p) => `${base}${encodeURI(p)}`);
@@ -180,18 +173,10 @@ export function Activities() {
   };
 
   const closeFullscreen = () => {
-    if (didSwipe.current) {
-      didSwipe.current = false;
-      return;
-    }
     setModalImages([]);
     setModalTitle("");
     setFullscreenIndex(null);
   };
-  const goPrev = () =>
-    setFullscreenIndex((i) => (i === null ? null : i > 0 ? i - 1 : modalImages.length - 1));
-  const goNext = () =>
-    setFullscreenIndex((i) => (i === null ? null : i < modalImages.length - 1 ? i + 1 : 0));
 
   return (
     <section id="activities" className="relative bg-palette-900 py-20 overflow-hidden">
@@ -228,84 +213,13 @@ export function Activities() {
 
       {/* Полноэкранный просмотр — открывается сразу при клике на заголовок */}
       {fullscreenIndex !== null && modalImages[fullscreenIndex] && (
-        <div
-          ref={fullscreenRef}
-          className="fixed inset-0 z-[101] flex items-center justify-center bg-black/95 p-4 outline-none"
-          style={{ touchAction: "pan-y" }}
-          onClick={closeFullscreen}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Escape") closeFullscreen();
-            if (e.key === "ArrowLeft") goPrev();
-            if (e.key === "ArrowRight") goNext();
-          }}
-          onTouchStart={(e) => {
-            touchStartX.current = e.touches[0].clientX;
-          }}
-          onTouchEnd={(e) => {
-            if (modalImages.length <= 1) return;
-            const delta = e.changedTouches[0].clientX - touchStartX.current;
-            if (Math.abs(delta) > SWIPE_THRESHOLD) {
-              didSwipe.current = true;
-              if (delta < 0) goNext();
-              else goPrev();
-            }
-          }}
-        >
-          <h3 className="absolute top-4 left-4 right-16 text-white font-bold text-lg z-10 line-clamp-2">
-            {modalTitle}
-          </h3>
-          <button
-            type="button"
-            onClick={closeFullscreen}
-            className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-            aria-label="Закрыть"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-          {modalImages.length > 1 && (
-            <>
-              <button
-                type="button"
-                onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-                aria-label="Предыдущее"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={(e) => { e.stopPropagation(); goNext(); }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-                aria-label="Следующее"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </>
-          )}
-          <div
-            className="max-w-[90vw] max-h-[90vh] flex items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={modalImages[fullscreenIndex]}
-              alt={`${modalTitle} — фото ${fullscreenIndex + 1}`}
-              className="max-w-full max-h-[90vh] object-contain rounded"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
-          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 text-sm">
-            {fullscreenIndex + 1} / {modalImages.length}
-          </span>
-        </div>
+        <ImageFullscreenViewer
+          images={modalImages}
+          title={modalTitle}
+          index={fullscreenIndex}
+          onIndexChange={setFullscreenIndex}
+          onClose={closeFullscreen}
+        />
       )}
     </section>
   );
