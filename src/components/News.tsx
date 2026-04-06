@@ -55,7 +55,7 @@ function NewsRow({
             {item.title}
           </h3>
           {item.previewImage && (
-            <div className="mt-4 mx-auto w-full max-w-lg h-40 md:h-44 rounded-lg border border-palette-900/10 overflow-hidden relative">
+            <div className="mt-4 mx-auto w-full max-w-lg h-[60vh] max-h-[700px] md:h-44 md:max-h-none rounded-lg border border-palette-900/10 overflow-hidden relative">
               <Image
                 src={`${base}${encodeURI(item.previewImage)}`}
                 alt={item.title}
@@ -80,6 +80,10 @@ function NewsRow({
 }
 
 export function News() {
+  const featuredSorted = [...featuredNews].sort(
+    (a, b) => Number.parseInt(b.num, 10) - Number.parseInt(a.num, 10)
+  );
+
   return (
     <section id="news" className="relative bg-white py-20 overflow-hidden">
       <svg className="absolute inset-0 w-full h-full opacity-[0.03]" style={{ pointerEvents: "none" }}>
@@ -103,7 +107,7 @@ export function News() {
             <h3 className="text-palette-400 text-sm md:text-base mb-3">
               Актуальные новости
             </h3>
-            {featuredNews.map((item, i) => (
+            {featuredSorted.map((item, i) => (
               <NewsRow
                 key={item.num}
                 item={item}

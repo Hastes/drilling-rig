@@ -22,7 +22,7 @@ export function NewsImageSlider({
 
   return (
     <div className="w-full">
-      <div className="relative w-full h-72 md:h-[28rem] rounded-xl overflow-hidden border border-palette-900/10 bg-palette-100">
+      <div className="relative w-full h-[60vh] max-h-[700px] md:h-[28rem] md:max-h-none rounded-xl overflow-hidden border border-palette-900/10 bg-palette-100">
         <Image
           src={`${base}${encodeURI(images[index])}`}
           alt=""
