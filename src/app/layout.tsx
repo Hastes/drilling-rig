@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: "ПРОМБУРСЕРВИС — Профессиональное бурение скважин",
   description:
     "Гидрогеология, геологические изыскания и тампонаж. Собственная техника, опытные специалисты. Новосибирск, Сибирь.",
+  verification: {
+    yandex: "af63f2b70aa90998",
+  },
 };
 
 export default function RootLayout({
