@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Ubuntu, Manrope } from "next/font/google";
 import { PageReadyProvider } from "@/context/PageReadyContext";
 import { Preloader } from "@/components/Preloader";
+import { YandexMetrika } from "@/components/YandexMetrika";
 import "./globals.css";
 
 const ubuntu = Ubuntu({
@@ -33,6 +34,7 @@ export default function RootLayout({
         <PageReadyProvider>
           <Preloader />
           {children}
+          <YandexMetrika />
         </PageReadyProvider>
       </body>
     </html>
