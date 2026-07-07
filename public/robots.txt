@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Host: https://xn--54-6kcp1akm.xn--p1ai
-Sitemap: https://xn--54-6kcp1akm.xn--p1ai/sitemap.xml
+Host: https://xn--54-9kc9cl.xn--p1ai
+Sitemap: https://xn--54-9kc9cl.xn--p1ai/sitemap.xml
