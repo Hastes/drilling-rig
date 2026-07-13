@@ -4,7 +4,7 @@ export function GeologySection() {
     <section className="py-20 md:py-20 bg-white">
       <div className="container-section">
         <div className="max-w-4xl mx-auto prose prose-lg prose-gray">
-          <h1 className="text-lg md:text-xl font-semibold text-gray-800 mb-6">
+          <h1 className="text-3xl md:text-4xl font-bold text-palette-900">
             Геологические изыскания и бурение скважин: никаких сомнений о грунте
           </h1>
 
@@ -12,7 +12,7 @@ export function GeologySection() {
             Бурение скважин и геологические изыскания позволяют решить множество задач: от получения разрешения на строительство объектов в конкретной местности, обеспечения частных домов водой до предотвращения разрушения крупных промышленных объектов. Так изыскания дают понимание того, что находится под землей, а бурение позволяет получить доступ к таким ресурсам или просто взять образцы грунта для исследования.
           </p>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-palette-900">
             Организация автономного водоснабжения в Новокузнецке под ключ
           </h2>
 
@@ -24,7 +24,7 @@ export function GeologySection() {
             Для удобства наших клиентов реализуем проекты бурения скважин под ключ: от первичной консультации и подбора места до запуска системы в эксплуатацию. Такой подход избавляет заказчиков от необходимости искать сторонних подрядчиков для закупки материалов или монтажа насосного оборудования.
           </p>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-palette-900">
             Исследование грунта – начальный этап любого строительства
           </h2>
 
