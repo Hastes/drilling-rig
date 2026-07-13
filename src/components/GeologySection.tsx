@@ -3,7 +3,7 @@ export function GeologySection() {
   return (
     <section className="py-20 md:py-20 bg-white">
       <div className="container-section">
-          <h1 className="text-3xl md:text-4xl font-bold text-palette-900">
+          <h1 className="text-3xl md:text-4xl font-bold text-palette-900 pb-10">
             Геологические изыскания и бурение скважин: никаких сомнений о грунте
           </h1>
 
