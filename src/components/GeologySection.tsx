@@ -3,7 +3,6 @@ export function GeologySection() {
   return (
     <section className="py-20 md:py-20 bg-white">
       <div className="container-section">
-        <div className="max-w-4xl mx-auto prose prose-lg prose-gray">
           <h1 className="text-3xl md:text-4xl font-bold text-palette-900">
             Геологические изыскания и бурение скважин: никаких сомнений о грунте
           </h1>
@@ -54,7 +53,6 @@ export function GeologySection() {
           <p className="text-gray-700 leading-relaxed">
             Помимо создания новых источников, мы занимаемся обслуживанием существующих гидросооружений. Наши специалисты выполняют восстановление скважин, возвращая им первоначальную производительность путем очистки фильтров и удаления песчаных пробок. При пересыхании источника, его техническом устаревании или угрозе обрушения нами может быть произведена даже профессиональная ликвидация скважин в соответствии со всеми экологическими нормами и правилами безопасности.
           </p>
-        </div>
       </div>
     </section>
   );
