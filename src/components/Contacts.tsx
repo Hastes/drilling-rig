@@ -42,6 +42,9 @@ export function Contacts() {
                 <div className="text-lg text-white leading-relaxed">
                   г. Новосибирск, ул. Восход, д. 1А, офис 29
                 </div>
+                <div className="text-lg text-white leading-relaxed">
+                  Новокузнецкийр-он, п. Елань, ул. Мирная, д.25
+                </div>
               </div>
             </div>
           </div>
