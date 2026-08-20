@@ -3,6 +3,7 @@ import { Ubuntu, Manrope } from "next/font/google";
 import { PageReadyProvider } from "@/context/PageReadyContext";
 import { Preloader } from "@/components/Preloader";
 import { YandexMetrika } from "@/components/YandexMetrika";
+import Script from "next/script";
 import "./globals.css";
 
 const ubuntu = Ubuntu({
