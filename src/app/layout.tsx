@@ -38,6 +38,10 @@ export default function RootLayout({
           <Preloader />
           {children}
           <YandexMetrika />
+          <Script
+          src="//izvonok.com/callback_api?key=8d17171dfa7c47bdbff10f2578738b94"
+          strategy="afterInteractive" // или "lazyOnload"
+        />
         </PageReadyProvider>
       </body>
     </html>
