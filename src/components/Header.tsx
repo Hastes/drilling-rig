@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import { Phone } from "lucide-react";
 const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const navItems = [
@@ -11,7 +11,7 @@ const navItems = [
 
 export function Header() {
   return (
-    <header className="absolute top-0 left-0 right-0 z-50">
+    <header className="fixed top-0 left-0 right-0 z-50">
       <div className="container-section w-full py-5 flex items-center justify-between">
         <a href="#" className="group flex items-center gap-3">
           <Image
@@ -43,6 +43,13 @@ export function Header() {
             </a>
           ))}
         </nav>
+        <a
+  href="tel:+79059170023"
+  className="flex items-center gap-1.5 text-white text-sm font-medium whitespace-nowrap hover:text-white/80 transition-colors"
+>
+  <Phone size={16} strokeWidth={1.5} />
+  +7 905 917 00 23
+</a>
       </div>
     </header>
   );
