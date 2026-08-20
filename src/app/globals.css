@@ -32,7 +32,9 @@ body {
 body.preloader-active {
   overflow: hidden;
 }
-
+header {
+	background: #00000050;
+}
 @layer components {
   .container-section {
     @apply max-w-[90rem] mx-auto px-5 sm:px-8 md:px-16 lg:px-24;
