@@ -10,6 +10,7 @@ import { Documentation } from "@/components/Documentation";
 import { News } from "@/components/News";
 import { Contacts } from "@/components/Contacts";
 import { GeologySection } from "@/components/GeologySection";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <TechnicalBase />
       <News />
       <Contacts />
+      <ScrollToTop />
     </main>
   );
 }
